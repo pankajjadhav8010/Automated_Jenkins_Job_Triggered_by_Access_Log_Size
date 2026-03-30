@@ -20,7 +20,9 @@ Jenkins (Automation Server)
 Amazon Web Services (S3 Storage)
 Cron (Scheduling)
 AWS CLI
+
 ⚙️ Workflow
+
 Cron runs monitoring script every few minutes
 Script checks log file size
 If size > 1GB → triggers Jenkins job
@@ -29,14 +31,18 @@ Uploads log file to S3
 Verifies upload
 Clears log file
 Logs and notifications generated
+
 📂 Project Structure
+
 .
 ├── monitor_log.sh          # Monitoring script
 ├── Jenkinsfile            # Pipeline definition
 ├── backup.log             # Execution logs
 ├── screenshots/           # Proof of execution
 └── README.md
+
 🧪 Monitoring Script
+
 📌 Function:
 Checks /var/log/httpd/access.log
 Triggers Jenkins job via API if size exceeds 1GB
@@ -106,6 +112,7 @@ pipeline {
 }
 ⏱️ Automation with Cron
 
+
 Edit crontab:
 
 crontab -e
@@ -118,7 +125,9 @@ aws s3 ls s3://your-s3-bucket-name/
 ✅ Log Cleared
 cat /var/log/httpd/access.log
 Output should be empty
+
 📸 Deliverables
+
 ✅ Monitoring script (monitor_log.sh)
 ✅ Jenkins Pipeline (Jenkinsfile)
 ✅ Screenshot of Jenkins job success
@@ -132,13 +141,17 @@ Add Email Notification plugin
 parameters {
     string(name: 'LOG_FILE', defaultValue: '/var/log/httpd/access.log')
 }
+
 🔐 Security Considerations
+
 Store Jenkins API token securely
 Use IAM role with limited S3 access
 Restrict script permissions:
 chmod 700 monitor_log.sh
 Avoid hardcoding credentials
+
 🚀 Key Learnings
+
 Automating log monitoring
 Integrating Jenkins with AWS
 Using AWS CLI for storage operations
@@ -150,6 +163,7 @@ Add CloudWatch monitoring
 Use Docker for containerized execution
 Integrate Slack alerts
 Implement log rotation using logrotate
+
 🤝 Conclusion
 
 This project provides a robust, automated solution to manage large log files and prevent server crashes. It demonstrates real-world DevOps practices including monitoring, automation, and cloud integration.
